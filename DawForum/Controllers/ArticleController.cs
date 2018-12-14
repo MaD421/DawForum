@@ -27,14 +27,14 @@ namespace DawForum.Controllers
             return View();
         }
 
-        [Authorize(Roles = "User,Editor,Administrator")]
+        [Authorize(Roles = "User,Moderator,Administrator")]
         public ActionResult Show(int id)
         {
             Article article = db.Articles.Find(id);
             ViewBag.Article = article;
             ViewBag.Category = article.Category;
             ViewBag.afisareButoane = false;
-            if(User.IsInRole("Editor") || User.IsInRole("Administrator")){
+            if(User.IsInRole("Moderator") || User.IsInRole("Administrator")){
                 ViewBag.afisareButoane = true;
             }
             ViewBag.esteAdmin = User.IsInRole("Administrator");
@@ -43,7 +43,7 @@ namespace DawForum.Controllers
            
         }
 
-        [Authorize(Roles = "Editor,Administrator")]
+        [Authorize(Roles = "Moderator,Administrator")]
         public ActionResult New()
         {
             Article article = new Article();
@@ -77,7 +77,7 @@ namespace DawForum.Controllers
 
        
         [HttpPost]
-        [Authorize(Roles = "Editor,Administrator")]
+        [Authorize(Roles = "Moderator,Administrator")]
         public ActionResult New(Article article)
         {
             article.Categories = GetAllCategories();
@@ -101,7 +101,7 @@ namespace DawForum.Controllers
             }
         }
 
-        [Authorize(Roles = "Editor,Administrator")]
+        [Authorize(Roles = "Moderator,Administrator")]
         public ActionResult Edit(int id)
         {
 
@@ -121,7 +121,7 @@ namespace DawForum.Controllers
 
         
         [HttpPut]
-        [Authorize(Roles = "Editor,Administrator")]
+        [Authorize(Roles = "Moderator,Administrator")]
         public ActionResult Edit(int id, Article requestArticle)
         {
             try
@@ -164,7 +164,7 @@ namespace DawForum.Controllers
         }
 
         [HttpDelete]
-        [Authorize(Roles = "Editor,Administrator")]
+        [Authorize(Roles = "Moderator,Administrator")]
         public ActionResult Delete(int id)
         {
 
