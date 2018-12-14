@@ -5,9 +5,9 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using Lab10IdentityNew.Models;
+using DawForum.Models;
 
-namespace Lab10IdentityNew
+namespace DawForum
 {
     public partial class Startup
     {

@@ -1,12 +1,11 @@
-﻿using CursLab8.Models;
-using Lab10IdentityNew.Models;
+﻿using DawForum.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace CursLab8.Controllers
+namespace DawForum.Controllers
 {
     [Authorize(Roles = "Administrator")]
     public class CategoriesController : Controller

@@ -1,6 +1,5 @@
-﻿using CursLab8.Models;
-using Lab10IdentityNew;
-using Lab10IdentityNew.Models;
+﻿using DawForum.Models;
+using DawForum;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -8,7 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace CursLab8.Controllers
+namespace DawForum.Controllers
 {
     [Authorize]
     public class ArticleController : Controller

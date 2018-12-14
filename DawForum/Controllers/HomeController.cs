@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Lab10IdentityNew.Controllers
+namespace DawForum.Controllers
 {
     public class HomeController : Controller
     {

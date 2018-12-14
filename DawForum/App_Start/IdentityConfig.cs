@@ -10,9 +10,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using Lab10IdentityNew.Models;
+using DawForum.Models;
 
-namespace Lab10IdentityNew
+namespace DawForum
 {
     public class EmailService : IIdentityMessageService
     {

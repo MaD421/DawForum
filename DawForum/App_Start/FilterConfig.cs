@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace Lab10IdentityNew
+namespace DawForum
 {
     public class FilterConfig
     {

@@ -8,9 +8,9 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using Lab10IdentityNew.Models;
+using DawForum.Models;
 
-namespace Lab10IdentityNew.Controllers
+namespace DawForum.Controllers
 {
     [Authorize]
     public class AccountController : Controller
