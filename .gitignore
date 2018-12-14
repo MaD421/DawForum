@@ -1,4 +1,4 @@
 .vs
 packages
-DawForum/bin
-DawForum/obj/Debug
+DawForum/bin/
+DawForum/obj/Debug/
