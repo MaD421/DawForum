@@ -14,7 +14,7 @@ namespace DawForum.Controllers
     {
         private ApplicationDbContext db = ApplicationDbContext.Create();
 
-        [Authorize(Roles = "User,Editor,Administrator")]
+        [Authorize(Roles = "User,Moderator,Administrator")]
         public ActionResult Index()
         {
             var articles = db.Articles.Include("Category").Include("User");
