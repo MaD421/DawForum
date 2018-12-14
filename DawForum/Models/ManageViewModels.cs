@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
-namespace Lab10IdentityNew.Models
+namespace DawForum.Models
 {
     public class IndexViewModel
     {

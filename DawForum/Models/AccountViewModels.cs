@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Lab10IdentityNew.Models
+namespace DawForum.Models
 {
     public class ExternalLoginConfirmationViewModel
     {

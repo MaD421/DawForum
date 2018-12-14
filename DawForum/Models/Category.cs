@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace CursLab8.Models
+namespace DawForum.Models
 {
     public class Category
     {
