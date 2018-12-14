@@ -1,5 +1,4 @@
-﻿using CursLab8.Models;
-using Lab10IdentityNew.Models;
+﻿using DawForum.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -9,7 +8,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
-namespace Lab10IdentityNew
+namespace DawForum
 {
     public class MvcApplication : System.Web.HttpApplication
     {

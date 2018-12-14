@@ -1,11 +1,11 @@
-﻿using Lab10IdentityNew.Models;
+﻿using DawForum.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(Lab10IdentityNew.Startup))]
-namespace Lab10IdentityNew
+[assembly: OwinStartupAttribute(typeof(DawForum.Startup))]
+namespace DawForum
 {
     public partial class Startup
     {
