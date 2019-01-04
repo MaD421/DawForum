@@ -27,4 +27,5 @@ Extra Tasks :
 Admin account:
 
 Email: user1@info.ro
+
 Password: Parola123*
