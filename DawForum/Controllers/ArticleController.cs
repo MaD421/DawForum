@@ -1,20 +1,16 @@
 ﻿using DawForum.Models;
-using DawForum;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace DawForum.Controllers
 {
-    [Authorize]
     public class ArticleController : Controller
     {
         private ApplicationDbContext db = ApplicationDbContext.Create();
 
-        [Authorize(Roles = "User,Moderator,Administrator")]
         public ActionResult Index()
         {
             var articles = db.Articles.Include("Category").Include("User");
@@ -27,7 +23,6 @@ namespace DawForum.Controllers
             return View();
         }
 
-        [Authorize(Roles = "User,Moderator,Administrator")]
         public ActionResult Show(int id)
         {
             Article article = db.Articles.Find(id);
@@ -43,7 +38,7 @@ namespace DawForum.Controllers
            
         }
 
-        [Authorize(Roles = "Moderator,Administrator")]
+        [Authorize(Roles = "User,Moderator,Administrator")]
         public ActionResult New()
         {
             Article article = new Article();
@@ -77,7 +72,7 @@ namespace DawForum.Controllers
 
        
         [HttpPost]
-        [Authorize(Roles = "Moderator,Administrator")]
+        [Authorize(Roles = "User,Moderator,Administrator")]
         public ActionResult New(Article article)
         {
             article.Categories = GetAllCategories();
@@ -101,7 +96,7 @@ namespace DawForum.Controllers
             }
         }
 
-        [Authorize(Roles = "Moderator,Administrator")]
+        [Authorize(Roles = "User,Moderator,Administrator")]
         public ActionResult Edit(int id)
         {
 
@@ -109,7 +104,7 @@ namespace DawForum.Controllers
             ViewBag.Article = article;
             article.Categories = GetAllCategories();
 
-            if(article.UserId == User.Identity.GetUserId() || User.IsInRole("Administrator"))
+            if(article.UserId == User.Identity.GetUserId() || User.IsInRole("Moderator") || User.IsInRole("Administrator"))
             {
                 return View(article);
             } else
@@ -121,7 +116,7 @@ namespace DawForum.Controllers
 
         
         [HttpPut]
-        [Authorize(Roles = "Moderator,Administrator")]
+        [Authorize(Roles = "User,Moderator,Administrator")]
         public ActionResult Edit(int id, Article requestArticle)
         {
             try
@@ -130,7 +125,7 @@ namespace DawForum.Controllers
                 {
                     Article article = db.Articles.Find(id);
 
-                    if (article.UserId == User.Identity.GetUserId() || User.IsInRole("Administrator"))
+                    if (article.UserId == User.Identity.GetUserId() || User.IsInRole("Moderator") || User.IsInRole("Administrator"))
                     {
                         if (TryUpdateModel(article))
                         {
@@ -164,13 +159,13 @@ namespace DawForum.Controllers
         }
 
         [HttpDelete]
-        [Authorize(Roles = "Moderator,Administrator")]
+        [Authorize(Roles = "User,Moderator,Administrator")]
         public ActionResult Delete(int id)
         {
 
             Article article = db.Articles.Find(id);
 
-            if (article.UserId == User.Identity.GetUserId() || User.IsInRole("Administrator"))
+            if (article.UserId == User.Identity.GetUserId() || User.IsInRole("Moderator") || User.IsInRole("Administrator"))
             {
                 db.Articles.Remove(article);
                 db.SaveChanges();

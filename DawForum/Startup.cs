@@ -56,7 +56,6 @@ namespace DawForum
                 role.Name = "User";
                 roleManager.Create(role);
             }
-
         }
     }
 }

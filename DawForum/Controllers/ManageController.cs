@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using DawForum.Models;
+using System.Security.Claims;
 
 namespace DawForum.Controllers
 {
@@ -15,9 +16,35 @@ namespace DawForum.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext db = ApplicationDbContext.Create();
 
         public ManageController()
         {
+        }
+
+        [Authorize(Roles = "User,Moderator,Administrator")]
+        public async Task<ActionResult> Extra()
+        {
+            var userId = User.Identity.GetUserId();
+            var model = new IndexViewModel();
+            model.Age = ((ClaimsIdentity)User.Identity).Claims.FirstOrDefault(x => x.Type == "Age").Value;
+            model.Country = ((ClaimsIdentity)User.Identity).Claims.FirstOrDefault(x => x.Type == "Country").Value;
+            try
+            {
+                model.FirstName = ((ClaimsIdentity)User.Identity).Claims.FirstOrDefault(x => x.Type == "FirstName").Value;
+            } catch
+            {
+                model.FirstName = "";
+            }
+            try
+            {
+                model.LastName = ((ClaimsIdentity)User.Identity).Claims.FirstOrDefault(x => x.Type == "LastName").Value;
+            }
+            catch
+            {
+                model.LastName = "";
+            }
+            return View(model);
         }
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)

@@ -22,6 +22,12 @@ namespace DawForum.Controllers
         {
         }
 
+        [Authorize(Roles = "User,Moderator,Administrator")]
+        public ActionResult Edit()
+        {
+            return View();
+        }
+
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
             UserManager = userManager;
