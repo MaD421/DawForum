@@ -23,3 +23,8 @@ Extra Tasks :
 
 - [ ] Refactoring
 - [ ] Design
+
+Admin account:
+
+Email: user1@info.ro
+Password: Parola123*
