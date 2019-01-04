@@ -5,7 +5,7 @@ Tasks :
 - [x] sa existe 4 tipuri de utilizatori: vizitator neinregistrat, utilizator inregistrat,moderator si administrator.
 - [ ]  pe prima pagina vor aparea mai multe categorii de discutie.
 - [x] In fiecare categorie vor exista mai multe subiecte de discutie.
-- [ ] subiectele dintr-o categorie pot fi vizualizate intr-o pagina noua.
+- [x] subiectele dintr-o categorie pot fi vizualizate intr-o pagina noua.
 - [ ] In cazul in care o categorie are mai multe subiecte de discutie, acestea vor fi afisate paginat.
 - [x] Administratorul poate face CRUD pe categorii.
 - [ ] discutiile sau raspunsurile vor fi afisate sortat in urma unor criterii stabilite de utilizator.
@@ -18,3 +18,8 @@ Tasks :
 lor.
 - [x] administratorul adauga categorii noi de subiecte (pot face CRUD pe categorii).
 - [ ] Tot administratorul este cel care asociaza sau revoca drepturile membrilor forumului.
+
+Extra Tasks :
+
+- [] Refactoring
+- [] Design
