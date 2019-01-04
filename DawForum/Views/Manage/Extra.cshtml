@@ -1,25 +1,31 @@
-﻿
+﻿@model DawForum.Models.IndexViewModel
+
 @{
     ViewBag.Title = "Extra";
 }
 
 
-<h2>Extra</h2>
+@TempData["message"]
 
-<h1>Age: </h1>
-
-@Model.Age
-
-<br />
-
-<h1>Country: </h1>
-
-@Model.Country
-
-<h1>FirstName: </h1>
-
-@Model.FirstName
-
-<h1>Lastname: </h1>
-
-@Model.LastName
+<form method="post" action="/Manage/Extra">
+    @Html.HttpMethodOverride(HttpVerbs.Put)
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    <br />
+    @Html.Label("Age", "Age")
+    <br />
+    @Html.EditorFor(model => model.Age)
+    <br />
+    @Html.Label("Country", "Country")
+    <br />
+    @Html.EditorFor(model => model.Country)
+    <br />
+    @Html.Label("First Name", "First Name")
+    <br />
+    @Html.EditorFor(model => model.FirstName)
+    <br />
+    @Html.Label("Last Name", "Last Name")
+    <br />
+    @Html.EditorFor(model => model.LastName)
+    <br />
+    <button class="btn btn-sm btn-success" type="submit">Update profile</button>
+</form>

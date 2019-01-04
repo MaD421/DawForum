@@ -18,10 +18,33 @@ namespace DawForum.Models
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Add custom user claims here
-            userIdentity.AddClaim(new Claim("Age", this.Age));
-            userIdentity.AddClaim(new Claim("Country", this.Country));
-            userIdentity.AddClaim(new Claim("FirstName", this.FirstName));
-            userIdentity.AddClaim(new Claim("LastName", this.LastName));
+            try
+            {
+                userIdentity.AddClaim(new Claim("Age", this.Age));
+            } catch
+            {
+
+            }
+            
+            try
+            {
+
+            } catch
+            {
+                userIdentity.AddClaim(new Claim("Country", this.Country));
+            }
+            try
+            {
+                userIdentity.AddClaim(new Claim("FirstName", this.FirstName));
+            } catch
+            {
+
+            }
+            try { userIdentity.AddClaim(new Claim("LastName", this.LastName));
+            } catch
+            {
+
+            }
 
             return userIdentity;
         }

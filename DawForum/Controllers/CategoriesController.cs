@@ -7,7 +7,6 @@ using System.Web.Mvc;
 
 namespace DawForum.Controllers
 {
-    [Authorize(Roles = "Administrator")]
     public class CategoriesController : Controller
     {
 
@@ -36,11 +35,13 @@ namespace DawForum.Controllers
             return View(category);
         }
 
+        [Authorize(Roles = "Administrator")]
         public ActionResult New()
         {
             return View();
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public ActionResult New(Category category)
         {
@@ -57,6 +58,7 @@ namespace DawForum.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int id)
         {
             Category category = db.Categories.Find(id);
@@ -64,6 +66,7 @@ namespace DawForum.Controllers
             return View(category);
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpPut]
         public ActionResult Edit(int id, Category requestCategory)
         {
@@ -92,6 +95,7 @@ namespace DawForum.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpDelete]
         public ActionResult Delete(int id)
         {

@@ -28,7 +28,14 @@ namespace DawForum.Controllers
             var userId = User.Identity.GetUserId();
             var model = new IndexViewModel();
             model.Age = ((ClaimsIdentity)User.Identity).Claims.FirstOrDefault(x => x.Type == "Age").Value;
-            model.Country = ((ClaimsIdentity)User.Identity).Claims.FirstOrDefault(x => x.Type == "Country").Value;
+            try
+            {
+                model.Country = ((ClaimsIdentity)User.Identity).Claims.FirstOrDefault(x => x.Type == "Country").Value;
+            }
+            catch
+            {
+                model.Country = "";
+            }
             try
             {
                 model.FirstName = ((ClaimsIdentity)User.Identity).Claims.FirstOrDefault(x => x.Type == "FirstName").Value;
@@ -45,6 +52,51 @@ namespace DawForum.Controllers
                 model.LastName = "";
             }
             return View(model);
+        }
+
+        [HttpPut]
+        [Authorize(Roles = "User,Moderator,Administrator")]
+        public ActionResult Extra(IndexViewModel requestIndexViewModel)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var userId = User.Identity.GetUserId();
+                    ApplicationUser user = _userManager.FindById(userId);
+
+                     if (TryUpdateModel(user))
+                        {
+                            if(requestIndexViewModel.Age != null)
+                            user.Age = requestIndexViewModel.Age;
+
+                            if (requestIndexViewModel.Country != null)
+                            user.Country = requestIndexViewModel.Country;
+
+                            if (requestIndexViewModel.FirstName != null)
+                            user.FirstName = requestIndexViewModel.FirstName;
+
+                            if (requestIndexViewModel.LastName != null)
+                            user.LastName = requestIndexViewModel.LastName;
+
+                            db.SaveChanges();
+                            TempData["message"] = "Modificarile au fost efectuate!";
+                        
+                    }
+                    return View();
+                }
+                else
+                {
+                    TempData["message"] = "Error";
+                    return View();
+                }
+
+            }
+            catch (Exception e)
+            {
+                TempData["message"] = e;
+                return View();
+            }
         }
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
