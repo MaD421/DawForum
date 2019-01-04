@@ -21,5 +21,5 @@ lor.
 
 Extra Tasks :
 
-- [] Refactoring
-- [] Design
+- [ ] Refactoring
+- [ ] Design
