@@ -82,7 +82,7 @@ namespace DawForum.Controllers
                 {
                     db.Topics.Add(topic);
                     db.SaveChanges();
-                    TempData["message"] = "Articolul a fost adaugat!";
+                    TempData["message"] = "Discutia a fost adaugata!";
                     return RedirectToAction("Index");
                 }
                 else
@@ -109,7 +109,7 @@ namespace DawForum.Controllers
                 return View(topic);
             } else
             {
-                TempData["message"] = "Nu aveti dreptul sa faceti modificari asupra unui articol care nu va apartine!";
+                TempData["message"] = "Nu aveti dreptul sa faceti modificari asupra unei discutii care nu va apartine!";
                 return RedirectToAction("Index");
             }
         }
@@ -134,13 +134,13 @@ namespace DawForum.Controllers
                             topic.Date = requestTopic.Date;
                             topic.CategoryId = requestTopic.CategoryId;
                             db.SaveChanges();
-                            TempData["message"] = "Articolul a fost modificat!";
+                            TempData["message"] = "Discutia a fost modificata!";
                         }
                         return RedirectToAction("Index");
                     }
                     else
                     {
-                        TempData["message"] = "Nu aveti dreptul sa faceti modificari asupra unui articol care nu va apartine!";
+                        TempData["message"] = "Nu aveti dreptul sa faceti modificari asupra unei discutii care nu va apartine!";
                         return RedirectToAction("Index");
                     }
 
@@ -169,12 +169,12 @@ namespace DawForum.Controllers
             {
                 db.Topics.Remove(topic);
                 db.SaveChanges();
-                TempData["message"] = "Articolul a fost sters!";
+                TempData["message"] = "Discutia a fost stersa!";
                 return RedirectToAction("Index");
             }
             else
             {
-                TempData["message"] = "Nu aveti dreptul sa stergeti un articol care nu va apartine!";
+                TempData["message"] = "Nu aveti dreptul sa stergeti o discutie care nu va apartine!";
                 return RedirectToAction("Index");
             }
 

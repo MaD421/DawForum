@@ -1,16 +1,17 @@
 ﻿<div class="panel panel-default">
     <div class="panel-heading">@Model.Title</div>
     <div class="panel-body">
-        Continut articol: <strong>@Model.Content</strong>
+        Continut comentariu: <strong>@Model.Content</strong>
         <br />
         <span class="label label-success">@Model.Date</span>
         <br />
-        <i class="glyphicon glyphicon-globe"></i> @Model.Category.CategoryName
+        <i class="glyphicon glyphicon-globe"></i> @Model.Topic.TopicName
         <br />
         <i class="glyphicon glyphicon-user"></i> <i>discutie scrisa de</i> <strong> @Model.User.UserName </strong>
     </div>
     <div class="panel-footer">
-        <a class="btn btn-sm btn-success" href="/Topic/Show/@Model.Id">Afisare discutie</a>
+        <a class="btn btn-sm btn-success" href="/Topic/Show/Comments/@Model.Id">Afisare comentarii</a>
     </div>
 </div>
 <br />
+

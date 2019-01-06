@@ -1,0 +1,16 @@
+﻿@model DawForum.Models.Comment
+@{
+    ViewBag.Titlu = "Creare comentariu";
+}
+
+<h2>@ViewBag.Titlu</h2>
+<form method="post" action="/Comment/New">
+    @Html.HiddenFor(m => m.UserId)
+
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    @Html.Label("Message", "Comentariul")
+    <br /><br />
+    @Html.Hidden("Date", DateTime.Now, new { @class = "form-control" })
+    <br />
+    <button class="btn btn-sm btn-success" type="submit">Adauga discutie</button>
+</form>

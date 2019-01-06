@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Afisare comentarii";
+}
+
+<h2>ViewBag.Title</h2>
+
+@if (TempData.ContainsKey("message"))
+{
+    <h3 class="alert alert-info" role="alert">@ViewBag.message</h3>
+}
+
+
+@foreach (DawForum.Models.Comment comment in ViewBag.Comments)
+{
+    @Html.Partial("CommentInfo", comment);
+
+}
+
+<a class="btn btn-sm btn-success" href="/Topic/New">Adauga un comentariu</a>
+<br />

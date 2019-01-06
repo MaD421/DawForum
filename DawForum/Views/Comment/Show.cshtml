@@ -1,0 +1,30 @@
+﻿@model DawForum.Models.Comment
+
+@{
+    ViewBag.Titlu = "Afisare comentarii";
+}
+
+<h2>@ViewBag.Titlu</h2>
+
+<br />
+
+@Html.Partial("ShowPartial")
+
+@if (ViewBag.afisareButoane == true && Model.UserId == ViewBag.utilizatorCurent || ViewBag.esteAdmin)
+{
+    <a class="btn btn-sm btn-info" href="/Comment/Edit/@Model.Id">
+        Modifica comentariul
+    </a>
+    <br />
+
+    <form method="post" action="/Comment/Delete/@Model.Id">
+        @Html.HttpMethodOverride(HttpVerbs.Delete)
+        <button class="btn btn-sm btn-danger" type="submit">Sterge comentariul</button>
+    </form>
+}
+
+<hr />
+<a class="btn btn-sm btn-success" href="/Comment/Index">Inapoi la comentarii</a> <a class="btn btn-sm btn-success" href="/Comment/New">Adauga Comentariu</a>
+
+<br />
+

@@ -195,6 +195,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\TopicController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -203,6 +204,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Topic.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -285,6 +287,11 @@
     <Content Include="Views\Shared\ShowPartial.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Manage\Extra.cshtml" />
+    <Content Include="Views\Comment\Index.cshtml" />
+    <Content Include="Views\Shared\CommentInfo.cshtml" />
+    <Content Include="Views\Comment\Edit.cshtml" />
+    <Content Include="Views\Comment\New.cshtml" />
+    <Content Include="Views\Comment\Show.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
