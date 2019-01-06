@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Afisare discutii";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@if (TempData.ContainsKey("message"))
+{
+    <h3 class="alert alert-info" role="alert">@ViewBag.message</h3>
+}
+
+
+@foreach (DawForum.Models.Topic topic in ViewBag.Topics)
+{
+    @Html.Partial("TopicInfo", topic);
+
+}
+
+<a class="btn btn-sm btn-success" href="/Topic/New">Adauga o discutie</a>
+<br />
+
+
