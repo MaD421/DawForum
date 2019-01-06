@@ -15,7 +15,7 @@ namespace DawForum
 
             routes.MapRoute(
                 name: "Default",
-                url: "",
+                url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Categories", action = "Index", id = UrlParameter.Optional }
             );
         }

@@ -1,5 +1,4 @@
 ﻿using DawForum.Models;
-using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,13 +31,7 @@ namespace DawForum.Controllers
         {
             Category category = db.Categories.Find(id);
             ViewBag.Category = category;
-            ViewBag.afisareButoane = false;
-            if (User.IsInRole("Moderator") || User.IsInRole("Administrator"))
-            {
-                ViewBag.afisareButoane = true;
-            }
-            ViewBag.esteAdmin = User.IsInRole("Administrator");
-            ViewBag.esteModerator = User.IsInRole("Moderator");
+
             return View(category);
         }
 
