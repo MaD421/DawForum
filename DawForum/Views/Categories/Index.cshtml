@@ -1,6 +1,8 @@
 ﻿
 @{
-    ViewBag.Titlu = "Afisare categorii";
+                /**/
+
+                ViewBag.Titlu = "Afisare categorii";
 }
 
 <h2>@ViewBag.Titlu</h2>
@@ -19,6 +21,9 @@
     <br />
 }
 
-<a class="btn btn-sm btn-success" href="/Categories/New">Adauga categorie</a>
+@if (this.User.IsInRole("Administrator"))
+{
+    <a class="btn btn-sm btn-success" href="/Categories/New">Adauga categorie</a>
+}
 <br />
 

@@ -1,31 +1,26 @@
-﻿@model DawForum.Models.IndexViewModel
+﻿@model DawForum.Models.ApplicationUser
 
 @{
     ViewBag.Title = "Extra";
 }
 
-
-@TempData["message"]
-
 <form method="post" action="/Manage/Extra">
     @Html.HttpMethodOverride(HttpVerbs.Put)
-    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
     <br />
-    @Html.Label("Age", "Age")
+    <i class="glyphicon glyphicon-user"></i>
+    @Html.Label("UserName", "Nume utilizator", new { @class = "" })
     <br />
-    @Html.EditorFor(model => model.Age)
+    @Html.EditorFor(m => m.UserName)
+    <br /><br />
+    <i class="glyphicon glyphicon-envelope"></i>
+    @Html.Label("Email", "Email utilizator", new { @class = "" })
     <br />
-    @Html.Label("Country", "Country")
+    @Html.EditorFor(m => m.Email)
+    <br /><br />
+    <i class="glyphicon glyphicon-phone"></i>
+    @Html.Label("PhoneNumber", "Numar telefon")
     <br />
-    @Html.EditorFor(model => model.Country)
+    @Html.EditorFor(m => m.PhoneNumber)
     <br />
-    @Html.Label("First Name", "First Name")
-    <br />
-    @Html.EditorFor(model => model.FirstName)
-    <br />
-    @Html.Label("Last Name", "Last Name")
-    <br />
-    @Html.EditorFor(model => model.LastName)
-    <br />
-    <button class="btn btn-sm btn-success" type="submit">Update profile</button>
+    <button class="btn btn-sm btn-success" type="submit">Save edit</button>
 </form>
