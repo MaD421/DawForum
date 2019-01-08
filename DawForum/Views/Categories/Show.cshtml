@@ -1,24 +1,24 @@
 ﻿@model DawForum.Models.Category
 
-
 @{
     ViewBag.Title = "Afisare categorie";
 }
-
 <h2>@ViewBag.Title</h2>
 <h1>@Model.CategoryName</h1>
 <br />
-
-<a class="btn btn-sm btn-info" href="/Categories/Edit/@Model.CategoryId">Modifica categoria</a>
-<br /><br />
-<form method="post" action="/Categories/Delete/@Model.CategoryId">
-    @Html.HttpMethodOverride(HttpVerbs.Delete)
-    <button class="btn btn-sm btn-danger" type="submit">Sterge categoria</button>
-</form>
-
-<hr />
-<a class="btn btn-sm btn-success" href="/Topic/Index">Inapoi la articole</a>
-<br /><br />
+@if (ViewBag.afisareButoane == true && ViewBag.esteModerator || ViewBag.esteAdmin)
+{
+    <a class="btn btn-sm btn-info" href="/Categories/Edit/@Model.CategoryId">Modifica categoria</a>
+    <br /><br />
+    <form method="post" action="/Categories/Delete/@Model.CategoryId">
+        @Html.HttpMethodOverride(HttpVerbs.Delete)
+        <button class="btn btn-sm btn-danger" type="submit">Sterge categoria</button>
+    </form>
+    <form method="get" action="/Topic/Index/@Model.CategoryId">
+        <button class="btn btn-sm btn-success" type="submit">Acceseaza discutiile</button>
+    </form>
+}
+<br />
 <a class="btn btn-sm btn-success" href="/Categories/Index">Inapoi la categorii</a>
 <br />
 

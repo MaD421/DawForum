@@ -25,10 +25,6 @@ namespace DawForum.Models
         public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
 
-       
-        // Se aduaga acest atribut pentru a putea prelua toate categoriile unui model in helper
-        public IEnumerable<SelectListItem> Categories { get; set; }
-
     }
 
     

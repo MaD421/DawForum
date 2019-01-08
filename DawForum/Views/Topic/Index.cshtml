@@ -1,22 +1,31 @@
-﻿@{
+﻿@model DawForum.Models.Topic
+@{
     ViewBag.Title = "Afisare discutii";
 }
-
 <h2>@ViewBag.Title</h2>
-
 @if (TempData.ContainsKey("message"))
 {
     <h3 class="alert alert-info" role="alert">@ViewBag.message</h3>
 }
 
-
 @foreach (DawForum.Models.Topic topic in ViewBag.Topics)
 {
-    @Html.Partial("TopicInfo", topic);
-
+    <div class="panel panel-default">
+        <div class="panel-heading">@topic.Title</div>
+        <div class="panel-body">
+            Continut discutie: <strong>@topic.Content</strong>
+            <br />
+            <span class="label label-success">@topic.Date</span>
+            <br />
+            <i class="glyphicon glyphicon-user"></i> <i>discutie scrisa de</i>
+            <strong>@topic.User.UserName</strong>
+        </div>
+        <div class="panel-footer">
+            <a class="btn btn-sm btn-success" href="/Topic/Show/@topic.Id">Afisare discutie</a>
+        </div>
+    </div>
 }
 
 <a class="btn btn-sm btn-success" href="/Topic/New">Adauga o discutie</a>
 <br />
-
 

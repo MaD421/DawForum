@@ -3,9 +3,8 @@
 @{
     ViewBag.Titlu = "Editare Discutie";
 }
-
 <h2>@ViewBag.Titlu</h2>
-<form method="post" action="/Topic/Edit/@Model.Id">
+<form method="post" action="/Topic/Edit">
     @Html.HttpMethodOverride(HttpVerbs.Put)
     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
     @Html.HiddenFor(m => m.Id)
@@ -22,9 +21,7 @@
     <br /><br />
     @Html.HiddenFor(m => m.Date)
     <br />
-    <label>Selectati categoria</label>
-    @Html.DropDownListFor(m => m.CategoryId, new SelectList(Model.Categories, "Value", "Text"), "Selectati categoria", new { @class = "form-control" })
     <br />
     <button class="btn btn-sm btn-success" type="submit">Modifica discutie</button>
+    <a class="btn btn-sm btn-success" href="/Topic/Index/@Model.CategoryId">Inapoi la discutii</a>
 </form>
-

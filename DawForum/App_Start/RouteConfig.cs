@@ -18,6 +18,12 @@ namespace DawForum
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Categories", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "Topic",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Topic", action = "Index", id = UrlParameter.Optional }
+            );
         }
     }
 }

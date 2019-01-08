@@ -12,9 +12,13 @@ namespace DawForum.Controllers
     {
         private ApplicationDbContext db = ApplicationDbContext.Create();
 
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
-            var comments = db.Comments.Include("Topic").Include("User");
+            var comments = from comment in db.Comments
+                           where comment.TopicId == id
+                           orderby comment.Date
+                           select comment;
+
             if (TempData.ContainsKey("message"))
             {
                 ViewBag.message = TempData["message"].ToString();

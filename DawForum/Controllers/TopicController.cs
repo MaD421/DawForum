@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -11,15 +12,15 @@ namespace DawForum.Controllers
     {
         private ApplicationDbContext db = ApplicationDbContext.Create();
 
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
-            var topics = db.Topics.Include("Category").Include("User");
+            var topics = db.Topics.Where(p => p.CategoryId == id).Include("User").Include("Category");
+            var test = topics.ToList();
+            ViewBag.Topics = test;
             if (TempData.ContainsKey("message"))
             {
                 ViewBag.message = TempData["message"].ToString();
             }
-            ViewBag.Topics = topics;
-            
             return View();
         }
 
@@ -39,16 +40,15 @@ namespace DawForum.Controllers
         }
 
         [Authorize(Roles = "User,Moderator,Administrator")]
-        public ActionResult New()
+        public ActionResult New(int id)
         {
             Topic topic = new Topic();
-            // preluam lista de categorii din metoda GetAllCategories()
-            topic.Categories = GetAllCategories();
+            topic.CategoryId = id;
             // Preluam ID-ul utilizatorului curent
             topic.UserId = User.Identity.GetUserId();
             return View(topic);
         }
-
+        /*
         [NonAction]
         public IEnumerable<SelectListItem> GetAllCategories()
         {
@@ -69,13 +69,13 @@ namespace DawForum.Controllers
             // returnam lista de categorii
             return selectList;
         }
-
+        */
        
         [HttpPost]
         [Authorize(Roles = "User,Moderator,Administrator")]
-        public ActionResult New(Topic topic)
+        public ActionResult New(Topic topic, int id)
         {
-            topic.Categories = GetAllCategories();
+            topic.CategoryId = id;
             try
             {
                 if (ModelState.IsValid)
@@ -102,7 +102,7 @@ namespace DawForum.Controllers
 
             Topic topic = db.Topics.Find(id);
             ViewBag.Topic = topic;
-            topic.Categories = GetAllCategories();
+            topic.CategoryId = id;
 
             if(topic.UserId == User.Identity.GetUserId() || User.IsInRole("Moderator") || User.IsInRole("Administrator"))
             {
@@ -124,6 +124,7 @@ namespace DawForum.Controllers
                 if (ModelState.IsValid)
                 {
                     Topic topic = db.Topics.Find(id);
+                    ViewBag.id = topic.Id;
 
                     if (topic.UserId == User.Identity.GetUserId() || User.IsInRole("Moderator") || User.IsInRole("Administrator"))
                     {
