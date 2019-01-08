@@ -8,6 +8,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using DawForum.Models;
 using System.Security.Claims;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
 
 namespace DawForum.Controllers
 {
@@ -23,67 +25,37 @@ namespace DawForum.Controllers
         }
 
         [Authorize(Roles = "User,Moderator,Administrator")]
-        public async Task<ActionResult> Extra()
+        public ActionResult Extra()
         {
-            var userId = User.Identity.GetUserId();
-            var model = new IndexViewModel();
-            model.Age = ((ClaimsIdentity)User.Identity).Claims.FirstOrDefault(x => x.Type == "Age").Value;
-            try
-            {
-                model.Country = ((ClaimsIdentity)User.Identity).Claims.FirstOrDefault(x => x.Type == "Country").Value;
-            }
-            catch
-            {
-                model.Country = "";
-            }
-            try
-            {
-                model.FirstName = ((ClaimsIdentity)User.Identity).Claims.FirstOrDefault(x => x.Type == "FirstName").Value;
-            } catch
-            {
-                model.FirstName = "";
-            }
-            try
-            {
-                model.LastName = ((ClaimsIdentity)User.Identity).Claims.FirstOrDefault(x => x.Type == "LastName").Value;
-            }
-            catch
-            {
-                model.LastName = "";
-            }
-            return View(model);
+            ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
+            return View(user);
         }
 
         [HttpPut]
         [Authorize(Roles = "User,Moderator,Administrator")]
-        public ActionResult Extra(IndexViewModel requestIndexViewModel)
+        public ActionResult Extra(ApplicationUser requestIndexViewModel)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
 
-                    ApplicationUser user = UserManager.FindById(User.Identity.GetUserId());
+                    ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
+                    ApplicationDbContext context = new ApplicationDbContext();
+                    var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+                    var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
                     if (TryUpdateModel(user))
                         {
-                            if(requestIndexViewModel.Age != null)
-                            user.Age = requestIndexViewModel.Age;
 
-                            if (requestIndexViewModel.Country != null)
-                            user.Country = requestIndexViewModel.Country;
+                        user.UserName = requestIndexViewModel.UserName;
+                        user.PhoneNumber = requestIndexViewModel.PhoneNumber;
+                        user.Email = requestIndexViewModel.Email;
 
-                            if (requestIndexViewModel.FirstName != null)
-                            user.FirstName = requestIndexViewModel.FirstName;
-
-                            if (requestIndexViewModel.LastName != null)
-                            user.LastName = requestIndexViewModel.LastName;
-
-                            UserManager.Update(user);
-                            //ApplicationUser user2 = UserManager.FindById(User.Identity.GetUserId());
-                            //TempData["message"] = "Succes" + user2.Age;
+                        TempData["message"] = "Datele au fost salvate";
+                        db.SaveChanges();
                     }
-                    return View();
+                    return RedirectToAction("Extra");
                 }
                 else
                 {
