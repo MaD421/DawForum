@@ -1,20 +1,20 @@
 ﻿@model DawForum.Models.Topic
 
 @{
-    ViewBag.Titlu = "Editare Discutie";
+    ViewBag.Titlu = "Editare discutie";
 }
 <h2>@ViewBag.Titlu</h2>
-<form method="post" action="/Topic/Edit">
+<form method="post" action="/Topic/Edit/@Model.Id">
     @Html.HttpMethodOverride(HttpVerbs.Put)
     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
     @Html.HiddenFor(m => m.Id)
     <br />
-    @Html.Label("Title", "Titlu Discutie")
+    @Html.Label("Title", "Titlu Articol")
     <br />
     @Html.EditorFor(m => m.Title)
     @Html.ValidationMessageFor(model => model.Title, "Titlul este obligatoriu", new { @class = "text-danger " })
     <br /><br />
-    @Html.Label("Content", "Continut Discutie")
+    @Html.Label("Content", "Continut Articol")
     <br />
     @Html.EditorFor(m => m.Content)
     @Html.ValidationMessageFor(model => model.Content, "Continutul este obligatoriu", new { @class = "text-danger " })
@@ -23,5 +23,5 @@
     <br />
     <br />
     <button class="btn btn-sm btn-success" type="submit">Modifica discutie</button>
-    <a class="btn btn-sm btn-success" href="/Topic/Index/@Model.CategoryId">Inapoi la discutii</a>
 </form>
+

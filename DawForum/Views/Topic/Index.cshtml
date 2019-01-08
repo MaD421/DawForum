@@ -1,5 +1,9 @@
 ﻿@model DawForum.Models.Topic
 @{
+    /**/
+
+    /**/
+
     ViewBag.Title = "Afisare discutii";
 }
 <h2>@ViewBag.Title</h2>
@@ -26,6 +30,9 @@
     </div>
 }
 
-<a class="btn btn-sm btn-success" href="/Topic/New">Adauga o discutie</a>
+<form method="get" action="/Topic/New/@ViewBag.CategoryId">
+    <button class="btn btn-sm btn-success" type="submit">Adauga o discutie</button>
+</form>
+
 <br />
 

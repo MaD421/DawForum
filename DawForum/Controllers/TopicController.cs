@@ -15,8 +15,8 @@ namespace DawForum.Controllers
         public ActionResult Index(int id)
         {
             var topics = db.Topics.Where(p => p.CategoryId == id).Include("User").Include("Category");
-            var test = topics.ToList();
-            ViewBag.Topics = test;
+            ViewBag.Topics = topics;
+            ViewBag.CategoryId = id;
             if (TempData.ContainsKey("message"))
             {
                 ViewBag.message = TempData["message"].ToString();
@@ -44,32 +44,9 @@ namespace DawForum.Controllers
         {
             Topic topic = new Topic();
             topic.CategoryId = id;
-            // Preluam ID-ul utilizatorului curent
             topic.UserId = User.Identity.GetUserId();
             return View(topic);
         }
-        /*
-        [NonAction]
-        public IEnumerable<SelectListItem> GetAllCategories()
-        {
-            // generam o lista goala
-            var selectList = new List<SelectListItem>();
-            // Extragem toate categoriile din baza de date
-            var categories = from cat in db.Categories select cat;
-            // iteram prin categorii
-            foreach(var category in categories)
-            {
-                // Adaugam in lista elementele necesare pentru dropdown
-                selectList.Add(new SelectListItem
-                {
-                    Value = category.CategoryId.ToString(),
-                    Text = category.CategoryName.ToString()
-                });
-            }
-            // returnam lista de categorii
-            return selectList;
-        }
-        */
        
         [HttpPost]
         [Authorize(Roles = "User,Moderator,Administrator")]
@@ -83,7 +60,7 @@ namespace DawForum.Controllers
                     db.Topics.Add(topic);
                     db.SaveChanges();
                     TempData["message"] = "Articolul a fost adaugat!";
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", new { id = id });
                 }
                 else
                 {
@@ -110,7 +87,7 @@ namespace DawForum.Controllers
             } else
             {
                 TempData["message"] = "Nu aveti dreptul sa faceti modificari asupra unui articol care nu va apartine!";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = id });
             }
         }
 
@@ -124,7 +101,6 @@ namespace DawForum.Controllers
                 if (ModelState.IsValid)
                 {
                     Topic topic = db.Topics.Find(id);
-                    ViewBag.id = topic.Id;
 
                     if (topic.UserId == User.Identity.GetUserId() || User.IsInRole("Moderator") || User.IsInRole("Administrator"))
                     {
@@ -137,12 +113,12 @@ namespace DawForum.Controllers
                             db.SaveChanges();
                             TempData["message"] = "Articolul a fost modificat!";
                         }
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Index", new { id = id });
                     }
                     else
                     {
                         TempData["message"] = "Nu aveti dreptul sa faceti modificari asupra unui articol care nu va apartine!";
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Index", new { id = id });
                     }
 
                     
@@ -171,12 +147,12 @@ namespace DawForum.Controllers
                 db.Topics.Remove(topic);
                 db.SaveChanges();
                 TempData["message"] = "Articolul a fost sters!";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = topic.CategoryId });
             }
             else
             {
                 TempData["message"] = "Nu aveti dreptul sa stergeti un articol care nu va apartine!";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = topic.CategoryId });
             }
 
         }

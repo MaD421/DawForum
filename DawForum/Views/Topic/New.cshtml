@@ -4,7 +4,7 @@
 }
 
 <h2>@ViewBag.Titlu</h2>
-<form method="post" action="/Topic/New">
+<form method="post" action="/Topic/New/@Model.CategoryId">
     @Html.HiddenFor(m => m.UserId)
     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
     @Html.Label("Title", "Titlu Discutie")
