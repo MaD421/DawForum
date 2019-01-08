@@ -3,7 +3,7 @@
 Tasks :
 
 - [x] sa existe 4 tipuri de utilizatori: vizitator neinregistrat, utilizator inregistrat,moderator si administrator.
-- [ ]  pe prima pagina vor aparea mai multe categorii de discutie.
+- [x]  pe prima pagina vor aparea mai multe categorii de discutie.
 - [x] In fiecare categorie vor exista mai multe subiecte de discutie.
 - [x] subiectele dintr-o categorie pot fi vizualizate intr-o pagina noua.
 - [ ] In cazul in care o categorie are mai multe subiecte de discutie, acestea vor fi afisate paginat.
