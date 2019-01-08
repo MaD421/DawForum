@@ -12,14 +12,26 @@
     <h3 class="alert alert-info" role="alert">@ViewBag.message</h3>
 }
 
-@foreach (var category in ViewBag.Categories)
-{
-    <p>@category.CategoryName</p>
-    <a class="btn btn-sm btn-success" href="/Categories/Show/@category.CategoryId">Afisare categorie</a>
-    <br />
-    <hr />
-    <br />
-}
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nume</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var category in ViewBag.Categories)
+            {
+                <tr>
+                    <th scope="row">@category.CategoryId</th>
+                    <td><a href="/Categories/Show/@category.CategoryId">@category.CategoryName</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
 
 @if (this.User.IsInRole("Administrator"))
 {
