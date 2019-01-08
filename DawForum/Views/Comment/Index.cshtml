@@ -1,20 +1,29 @@
-﻿@{
+﻿@model DawForum.Models.Comment
+
+@{
     ViewBag.Title = "Afisare comentarii";
 }
-
-<h2>ViewBag.Title</h2>
-
+<h2>@ViewBag.Title</h2>
 @if (TempData.ContainsKey("message"))
 {
     <h3 class="alert alert-info" role="alert">@ViewBag.message</h3>
 }
 
-
 @foreach (DawForum.Models.Comment comment in ViewBag.Comments)
 {
-    @Html.Partial("CommentInfo", comment);
+    <div class="panel-body">
+        Continut comentariu: <strong>@comment.Message</strong>
+        <br />
+        <span class="label label-success">@comment.Date</span>
+        <br />
+        <i class="glyphicon glyphicon-user"></i> <i>discutie scrisa de</i> <strong> @comment.User.UserName </strong>
+    </div>
+    <div class="panel-footer">
+        <a class="btn btn-sm btn-success" href="/Comment/Show/@comment.Id">Afisare comentarii</a>
+    </div>
 
 }
-
-<a class="btn btn-sm btn-success" href="/Topic/New">Adauga un comentariu</a>
+    <form method="get" action="/Comment/New/@ViewBag.TopicId">
+        <button class="btn btn-sm btn-success" type="submit">Adauga un comentariu</button>
+    </form>
 <br />

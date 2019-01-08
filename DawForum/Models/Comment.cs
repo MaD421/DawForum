@@ -21,6 +21,5 @@ namespace DawForum.Models
         public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
 
-        public IEnumerable<SelectListItem> Topics { get; set; }
     }
 }

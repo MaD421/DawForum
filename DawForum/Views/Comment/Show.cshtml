@@ -1,20 +1,24 @@
 ﻿@model DawForum.Models.Comment
 
 @{
-    ViewBag.Titlu = "Afisare comentarii";
+    ViewBag.Titlu = "Afisare comentariu";
 }
 
 <h2>@ViewBag.Titlu</h2>
 
 <br />
 
-@Html.Partial("ShowPartial")
+<div class="panel panel-default">
+    <div class="panel-body">
+        Continut discutie: <strong>@Model.Message</strong>
+        <br />
+        <span class="label label-success">@Model.Date</span>
+    </div>
+</div>
 
 @if (ViewBag.afisareButoane == true && Model.UserId == ViewBag.utilizatorCurent || ViewBag.esteAdmin)
 {
-    <a class="btn btn-sm btn-info" href="/Comment/Edit/@Model.Id">
-        Modifica comentariul
-    </a>
+    <a class="btn btn-sm btn-info" href="/Comment/Edit/@Model.Id"> Modifica comentariul </a>
     <br />
 
     <form method="post" action="/Comment/Delete/@Model.Id">
@@ -24,7 +28,6 @@
 }
 
 <hr />
-<a class="btn btn-sm btn-success" href="/Comment/Index">Inapoi la comentarii</a> <a class="btn btn-sm btn-success" href="/Comment/New">Adauga Comentariu</a>
-
+<a class="btn btn-sm btn-success" href="/Comment/Index/@Model.TopicId">Inapoi la comentarii</a> 
 <br />
 

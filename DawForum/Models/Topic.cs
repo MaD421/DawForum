@@ -25,6 +25,7 @@ namespace DawForum.Models
         public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
 
+        public virtual ICollection<Comment> Comment { get; set; }
     }
 
     

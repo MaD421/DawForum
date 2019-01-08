@@ -4,13 +4,16 @@
 }
 
 <h2>@ViewBag.Titlu</h2>
-<form method="post" action="/Comment/New">
+<form method="post" action="/Comment/New/@Model.TopicId">
     @Html.HiddenFor(m => m.UserId)
-
-    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
     @Html.Label("Message", "Comentariul")
+    <br />
+    @Html.TextArea("Content", null, new { @class = "form-control" })
+    @Html.ValidationMessageFor(model => model.Message, "Comentariul este obligatoriu", new { @class = "text-danger " })
     <br /><br />
     @Html.Hidden("Date", DateTime.Now, new { @class = "form-control" })
+    <br />
+    @Html.HiddenFor(m => m.TopicId)
     <br />
     <button class="btn btn-sm btn-success" type="submit">Adauga discutie</button>
 </form>

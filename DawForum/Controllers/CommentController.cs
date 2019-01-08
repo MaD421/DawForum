@@ -14,17 +14,14 @@ namespace DawForum.Controllers
 
         public ActionResult Index(int id)
         {
-            var comments = from comment in db.Comments
-                           where comment.TopicId == id
-                           orderby comment.Date
-                           select comment;
+            var comments = db.Comments.Include("User").Include("Topic");
 
             if (TempData.ContainsKey("message"))
             {
                 ViewBag.message = TempData["message"].ToString();
             }
             ViewBag.Comments = comments;
-
+            ViewBag.TopicId = id;
             return View();
         }
 
@@ -44,18 +41,19 @@ namespace DawForum.Controllers
         }
 
         [Authorize(Roles = "User,Moderator,Administrator")]
-        public ActionResult New()
+        public ActionResult New(int id)
         {
             Comment comment = new Comment();
             comment.UserId = User.Identity.GetUserId();
-            //comment.TopicID = topicul curent
+            comment.TopicId = id;
             return View(comment);
         }
 
         [HttpPost]
         [Authorize(Roles = "User,Moderator,Administrator")]
-        public ActionResult New(Comment comment)
+        public ActionResult New(Comment comment, int id)
         {
+            comment.TopicId = id;
             try
             {
                 if (ModelState.IsValid)
@@ -63,7 +61,7 @@ namespace DawForum.Controllers
                     db.Comments.Add(comment);
                     db.SaveChanges();
                     TempData["message"] = "Mesajul a fost adaugata!";
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", new { id = id });
                 }
                 else
                 {
@@ -90,7 +88,7 @@ namespace DawForum.Controllers
             else
             {
                 TempData["message"] = "Nu aveti dreptul sa faceti modificari asupra unui comentariu care nu va apartine!";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = id });
             }
         }
 
@@ -115,12 +113,12 @@ namespace DawForum.Controllers
                             db.SaveChanges();
                             TempData["message"] = "Comentariul a fost modificat!";
                         }
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Index", new { id = id });
                     }
                     else
                     {
                         TempData["message"] = "Nu aveti dreptul sa faceti modificari asupra unui comentariu care nu va apartine!";
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Index", new { id = id });
                     }
 
 
@@ -149,12 +147,12 @@ namespace DawForum.Controllers
                 db.Comments.Remove(comment);
                 db.SaveChanges();
                 TempData["message"] = "Comentariul a fost sters!";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = comment.TopicId });
             }
             else
             {
                 TempData["message"] = "Nu aveti dreptul sa stergeti un comentariu care nu va apartine!";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = comment.TopicId });
             }
 
         }

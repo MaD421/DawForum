@@ -69,7 +69,7 @@ namespace DawForum.Controllers
                     db.Topics.Add(topic);
                     db.SaveChanges();
                     TempData["message"] = "Articolul a fost adaugat!";
-                    return RedirectToAction("Index", new { id = id });
+                    return RedirectToAction("Index", new { id = id, type = 1 });
                 }
                 else
                 {
@@ -96,7 +96,7 @@ namespace DawForum.Controllers
             } else
             {
                 TempData["message"] = "Nu aveti dreptul sa faceti modificari asupra unui articol care nu va apartine!";
-                return RedirectToAction("Index", new { id = id });
+                return RedirectToAction("Index", new { id = id, type = 1 });
             }
         }
 
@@ -122,12 +122,12 @@ namespace DawForum.Controllers
                             db.SaveChanges();
                             TempData["message"] = "Articolul a fost modificat!";
                         }
-                        return RedirectToAction("Index", new { id = id });
+                        return RedirectToAction("Index", new { id = id, type = 1 });
                     }
                     else
                     {
                         TempData["message"] = "Nu aveti dreptul sa faceti modificari asupra unui articol care nu va apartine!";
-                        return RedirectToAction("Index", new { id = id });
+                        return RedirectToAction("Index", new { id = id, type = 1 });
                     }
 
                     
@@ -156,12 +156,12 @@ namespace DawForum.Controllers
                 db.Topics.Remove(topic);
                 db.SaveChanges();
                 TempData["message"] = "Articolul a fost sters!";
-                return RedirectToAction("Index", new { id = topic.CategoryId });
+                return RedirectToAction("Index", new { id = topic.CategoryId, type = 1 });
             }
             else
             {
                 TempData["message"] = "Nu aveti dreptul sa stergeti un articol care nu va apartine!";
-                return RedirectToAction("Index", new { id = topic.CategoryId });
+                return RedirectToAction("Index", new { id = topic.CategoryId, type = 1 });
             }
 
         }
