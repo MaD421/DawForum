@@ -12,10 +12,19 @@ namespace DawForum.Controllers
     {
         private ApplicationDbContext db = ApplicationDbContext.Create();
 
-        public ActionResult Index(int id)
+        public ActionResult Index(int id,int type)
         {
             var topics = db.Topics.Where(p => p.CategoryId == id).Include("User").Include("Category");
-            ViewBag.Topics = topics;
+            if (type == 1)
+            {
+                ViewBag.type = 1;
+                ViewBag.Topics = topics.OrderBy(p => p.Id);
+            }
+            else
+            {
+                ViewBag.type = 2;
+                ViewBag.Topics = topics.OrderBy(p => p.Title);
+            }
             ViewBag.CategoryId = id;
             if (TempData.ContainsKey("message"))
             {

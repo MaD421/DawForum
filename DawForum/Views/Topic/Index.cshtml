@@ -4,6 +4,8 @@
 
     /**/
 
+    /**/
+
     ViewBag.Title = "Afisare discutii";
 }
 <h2>@ViewBag.Title</h2>
@@ -33,6 +35,21 @@
 <form method="get" action="/Topic/New/@ViewBag.CategoryId">
     <button class="btn btn-sm btn-success" type="submit">Adauga o discutie</button>
 </form>
+<br />
+
+@if (ViewBag.type == 1)
+{
+    <form method="get" action="/Topic/Index/@ViewBag.CategoryId/2">
+        <button class="btn btn-sm btn-success" type="submit">Sorteaza dupa nume</button>
+    </form>
+}
+else
+{
+    <form method="get" action="/Topic/Index/@ViewBag.CategoryId/1">
+        <button class="btn btn-sm btn-success" type="submit">Sorteaza dupa data</button>
+    </form>
+}
+
 
 <br />
 
