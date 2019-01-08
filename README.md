@@ -17,7 +17,7 @@ Tasks :
 - [x] moderatorii se ocupa de stergerea discutiilor si mesajelor care au continut neadecvat si de plasarea subiectelor de discutie in categoria corespunzatoare
 lor.
 - [x] administratorul adauga categorii noi de subiecte (pot face CRUD pe categorii).
-- [ ] Tot administratorul este cel care asociaza sau revoca drepturile membrilor forumului.
+- [x] Tot administratorul este cel care asociaza sau revoca drepturile membrilor forumului.
 
 Extra Tasks :
 
