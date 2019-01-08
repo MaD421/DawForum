@@ -62,10 +62,10 @@ namespace DawForum.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var userId = User.Identity.GetUserId();
-                    ApplicationUser user = _userManager.FindById(userId);
 
-                     if (TryUpdateModel(user))
+                    ApplicationUser user = UserManager.FindById(User.Identity.GetUserId());
+
+                    if (TryUpdateModel(user))
                         {
                             if(requestIndexViewModel.Age != null)
                             user.Age = requestIndexViewModel.Age;
@@ -79,9 +79,9 @@ namespace DawForum.Controllers
                             if (requestIndexViewModel.LastName != null)
                             user.LastName = requestIndexViewModel.LastName;
 
-                            db.SaveChanges();
-                            TempData["message"] = "Modificarile au fost efectuate!";
-                        
+                            UserManager.Update(user);
+                            //ApplicationUser user2 = UserManager.FindById(User.Identity.GetUserId());
+                            //TempData["message"] = "Succes" + user2.Age;
                     }
                     return View();
                 }
