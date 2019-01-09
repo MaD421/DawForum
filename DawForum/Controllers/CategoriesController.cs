@@ -27,20 +27,6 @@ namespace DawForum.Controllers
             return View();
         }
 
-        public ActionResult Show(int id)
-        {
-            Category category = db.Categories.Find(id);
-            ViewBag.Category = category;
-            ViewBag.afisareButoane = false;
-            if (User.IsInRole("Moderator") || User.IsInRole("Administrator"))
-            {
-                ViewBag.afisareButoane = true;
-            }
-            ViewBag.esteAdmin = User.IsInRole("Administrator");
-            ViewBag.esteModerator = User.IsInRole("Moderator");
-            return View(category);
-        }
-
         [Authorize(Roles = "Administrator")]
         public ActionResult New()
         {

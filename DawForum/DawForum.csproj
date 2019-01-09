@@ -288,7 +288,6 @@
     <Content Include="Views\Categories\Edit.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
     <Content Include="Views\Categories\New.cshtml" />
-    <Content Include="Views\Categories\Show.cshtml" />
     <Content Include="Views\Shared\TopicInfo.cshtml" />
     <Content Include="Views\Shared\ShowPartial.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />

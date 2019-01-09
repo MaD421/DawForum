@@ -17,6 +17,10 @@
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Nume</th>
+                @if (this.User.IsInRole("Administrator"))
+                {
+                    <th scope="col">Admin settings</th>
+                }
             </tr>
         </thead>
         <tbody>
@@ -25,7 +29,21 @@
             {
                 <tr>
                     <th scope="row">@category.CategoryId</th>
-                    <td><a href="/Categories/Show/@category.CategoryId">@category.CategoryName</a></td>
+                    <td>
+                        <a href="/Topic/Index/@category.CategoryId/1">@category.CategoryName</a>
+
+                        @if (this.User.IsInRole("Administrator"))
+                        {
+                    <td>
+                        <a class="btn btn-sm btn-info" href="/Categories/Edit/@category.CategoryId">Modifica categoria</a>
+                        <form method="post" action="/Categories/Delete/@category.CategoryId">
+                            @Html.HttpMethodOverride(HttpVerbs.Delete)
+                            <button class="btn btn-sm btn-danger" type="submit">Sterge categoria</button>
+                        </form>
+                    </td>
+                        }
+
+                    </td>
                 </tr>
             }
         </tbody>
