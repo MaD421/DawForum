@@ -81,23 +81,22 @@ namespace DawForum.Controllers
                 if (ModelState.IsValid)
                 {
                     Comment comment = db.Comments.Find(id);
+                    var topicId = comment.TopicId;
 
                     if (comment.UserId == User.Identity.GetUserId() || User.IsInRole("Moderator") || User.IsInRole("Administrator"))
                     {
                         if (TryUpdateModel(comment))
                         {
                             comment.Message = requestComment.Message;
-                            comment.Date = requestComment.Date;
-                            comment.TopicId = requestComment.TopicId;
                             db.SaveChanges();
                             TempData["message"] = "Comentariul a fost modificat!";
                         }
-                        return RedirectToAction("Index", new { id = id });
+                        return RedirectToAction("Index", new { id = topicId });
                     }
                     else
                     {
                         TempData["message"] = "Nu aveti dreptul sa faceti modificari asupra unui comentariu care nu va apartine!";
-                        return RedirectToAction("Index", new { id = id });
+                        return RedirectToAction("Index", new { id = topicId });
                     }
 
 

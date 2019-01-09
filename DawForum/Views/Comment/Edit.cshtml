@@ -15,10 +15,6 @@
     @Html.EditorFor(m => m.Message)
     @Html.ValidationMessageFor(model => model.Message, "Textul este obligatoriu", new { @class = "text-danger " })
     <br />
-    <br />  
-    @Html.HiddenFor(m => m.Date)
-    <br />
-    <br />
     <button class="btn btn-sm btn-success" type="submit">Modifica comentariul</button>
 </form>
 
