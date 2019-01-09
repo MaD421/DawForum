@@ -10,7 +10,6 @@
     <h3 class="alert alert-info" role="alert">@ViewBag.message</h3>
 }
 
-
 <table class="table">
     <thead>
         <tr>
@@ -23,7 +22,7 @@
         @foreach (DawForum.Models.Topic topic in ViewBag.Topics)
         {
             <tr>
-                <td scope="row"><a href="/Topic/Show/@topic.Id">@topic.Title</a></td>
+                <td scope="row"><a href="/Comment/Index/@topic.Id">@topic.Title</a></td>
                 <td scope="row">@topic.User.UserName</td>
                 <td scope="row">@topic.Date</td>
             </tr>

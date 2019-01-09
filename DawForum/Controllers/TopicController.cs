@@ -33,21 +33,6 @@ namespace DawForum.Controllers
             return View();
         }
 
-        public ActionResult Show(int id)
-        {
-            Topic topic = db.Topics.Find(id);
-            ViewBag.Topic = topic;
-            ViewBag.Category = topic.Category;
-            ViewBag.afisareButoane = false;
-            if(User.IsInRole("Moderator") || User.IsInRole("Administrator")){
-                ViewBag.afisareButoane = true;
-            }
-            ViewBag.esteAdmin = User.IsInRole("Administrator");
-            ViewBag.utilizatorCurent = User.Identity.GetUserId();
-            return View(topic);
-           
-        }
-
         [Authorize(Roles = "User,Moderator,Administrator")]
         public ActionResult New(int id)
         {

@@ -9,21 +9,53 @@
     <h3 class="alert alert-info" role="alert">@ViewBag.message</h3>
 }
 
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">
+                @ViewBag.topic.User.UserName
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@ViewBag.topic.Content</td>
+        </tr>
+    </tbody>
+</table>
+
 @foreach (DawForum.Models.Comment comment in ViewBag.Comments)
 {
-    <div class="panel-body">
-        Continut comentariu: <strong>@comment.Message</strong>
-        <br />
-        <span class="label label-success">@comment.Date</span>
-        <br />
-        <i class="glyphicon glyphicon-user"></i> <i>discutie scrisa de</i> <strong> @comment.User.UserName </strong>
-    </div>
-    <div class="panel-footer">
-        <a class="btn btn-sm btn-success" href="/Comment/Show/@comment.Id">Afisare comentarii</a>
-    </div>
-
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">
+                    @comment.User.UserName on @comment.Date
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@comment.Message</td>
+            </tr>
+        </tbody>
+    </table>
 }
-    <form method="get" action="/Comment/New/@ViewBag.TopicId">
-        <button class="btn btn-sm btn-success" type="submit">Adauga un comentariu</button>
-    </form>
+
+<form method="get" action="/Comment/New/@ViewBag.TopicId">
+    <button class="btn btn-sm btn-success" type="submit">Adauga un comentariu</button>
+</form>
+
 <br />
+
+@if (this.User.IsInRole("Administrator"))
+{
+    <a class="btn btn-sm btn-info" href="/Topic/Edit/@ViewBag.TopicId"> Modifica topic-ul </a>
+    <br />
+
+    <form method="post" action="/Topic/Delete/@ViewBag.TopicId">
+        @Html.HttpMethodOverride(HttpVerbs.Delete)
+        <button class="btn btn-sm btn-danger" type="submit">Sterge topic-ul</button>
+    </form>
+}

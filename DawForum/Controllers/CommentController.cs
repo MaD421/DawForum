@@ -14,30 +14,17 @@ namespace DawForum.Controllers
 
         public ActionResult Index(int id)
         {
-            var comments = db.Comments.Include("User").Include("Topic");
+            var comments = db.Comments.Include("User").Include("Topic").Where(p => p.Topic.Id == id);
+            var topic = db.Topics.Find(id);
 
             if (TempData.ContainsKey("message"))
             {
                 ViewBag.message = TempData["message"].ToString();
             }
+            ViewBag.Topic = topic;
             ViewBag.Comments = comments;
             ViewBag.TopicId = id;
             return View();
-        }
-
-        public ActionResult Show(int id)
-        {
-            Comment comment = db.Comments.Find(id);
-            ViewBag.Comment = comment;
-            ViewBag.Topic = comment.Topic;
-            ViewBag.afisareButoane = false;
-            if (User.IsInRole("Moderator") || User.IsInRole("Administrator"))
-            {
-                ViewBag.afisareButoane = true;
-            }
-            ViewBag.esteAdmin = User.IsInRole("Administrator");
-            ViewBag.utilizatorCurent = User.Identity.GetUserId();
-            return View(comment);
         }
 
         [Authorize(Roles = "User,Moderator,Administrator")]
