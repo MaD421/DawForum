@@ -28,7 +28,7 @@
             @foreach (var category in ViewBag.Categories)
             {
                 <tr>
-                    <th scope="row">@category.CategoryId</th>
+                    <td scope="row">@category.CategoryId</td>
                     <td>
                         <a href="/Topic/Index/@category.CategoryId/1">@category.CategoryName</a>
 

@@ -1,6 +1,8 @@
 ﻿@model DawForum.Models.Topic
 @{
-    ViewBag.Title = "Afisare discutii";
+                /**/
+
+                ViewBag.Title = "Afisare discutii";
 }
 <h2>@ViewBag.Title</h2>
 @if (TempData.ContainsKey("message"))
@@ -8,42 +10,45 @@
     <h3 class="alert alert-info" role="alert">@ViewBag.message</h3>
 }
 
-@foreach (DawForum.Models.Topic topic in ViewBag.Topics)
-{
-    <div class="panel panel-default">
-        <div class="panel-heading">@topic.Title</div>
-        <div class="panel-body">
-            Continut discutie: <strong>@topic.Content</strong>
-            <br />
-            <span class="label label-success">@topic.Date</span>
-            <br />
-            <i class="glyphicon glyphicon-user"></i> <i>discutie scrisa de</i>
-            <strong>@topic.User.UserName</strong>
-        </div>
-        <div class="panel-footer">
-            <a class="btn btn-sm btn-success" href="/Topic/Show/@topic.Id">Afisare discutie</a>
-        </div>
-    </div>
-}
 
-<form method="get" action="/Topic/New/@ViewBag.CategoryId">
-    <button class="btn btn-sm btn-success" type="submit">Adauga o discutie</button>
-</form>
-<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (DawForum.Models.Topic topic in ViewBag.Topics)
+        {
+            <tr>
+                <td scope="row"><a href="/Topic/Show/@topic.Id">@topic.Title</a></td>
+                <td scope="row">@topic.User.UserName</td>
+                <td scope="row">@topic.Date</td>
+            </tr>
+        }
+    </tbody>
+</table>
 
-@if (ViewBag.type == 1)
+
+@if (this.User.IsInRole("User") || this.User.IsInRole("Moderator")  || this.User.IsInRole("Administrator"))
 {
-    <form method="get" action="/Topic/Index/@ViewBag.CategoryId/2">
-        <button class="btn btn-sm btn-success" type="submit">Sorteaza dupa nume</button>
+    <form method="get" action="/Topic/New/@ViewBag.CategoryId">
+        <button class="btn btn-sm btn-success" type="submit">Adauga o discutie</button>
     </form>
+    <br />
+
+    if (ViewBag.type == 1)
+    {
+        <form method="get" action="/Topic/Index/@ViewBag.CategoryId/2">
+            <button class="btn btn-sm btn-success" type="submit">Sorteaza dupa nume</button>
+        </form>
+    }
+    else
+    {
+        <form method="get" action="/Topic/Index/@ViewBag.CategoryId/1">
+            <button class="btn btn-sm btn-success" type="submit">Sorteaza dupa data</button>
+        </form>
+    }
 }
-else
-{
-    <form method="get" action="/Topic/Index/@ViewBag.CategoryId/1">
-        <button class="btn btn-sm btn-success" type="submit">Sorteaza dupa data</button>
-    </form>
-}
-
-
-<br />
-
