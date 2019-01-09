@@ -27,20 +27,12 @@ namespace DawForum.Controllers
             return View();
         }
 
-        [Authorize(Roles = "User,Moderator,Administrator")]
-        public ActionResult New(int id)
-        {
-            Comment comment = new Comment();
-            comment.UserId = User.Identity.GetUserId();
-            comment.TopicId = id;
-            return View(comment);
-        }
-
         [HttpPost]
         [Authorize(Roles = "User,Moderator,Administrator")]
         public ActionResult New(Comment comment, int id)
         {
             comment.TopicId = id;
+            comment.UserId = User.Identity.GetUserId();
             try
             {
                 if (ModelState.IsValid)
@@ -52,12 +44,12 @@ namespace DawForum.Controllers
                 }
                 else
                 {
-                    return View(comment);
+                    return RedirectToAction("Index", new { id = id });
                 }
             }
             catch (Exception e)
             {
-                return View(comment);
+                return RedirectToAction("Index", new { id = id });
             }
         }
 
