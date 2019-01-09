@@ -102,16 +102,15 @@ namespace DawForum.Controllers
                         {
                             topic.Title = requestTopic.Title;
                             topic.Content = requestTopic.Content;
-                            topic.CategoryId = requestTopic.CategoryId;
                             db.SaveChanges();
                             TempData["message"] = "Articolul a fost modificat!";
                         }
-                        return RedirectToAction("Index", new { id = id, type = 1 });
+                        return RedirectToAction("Index", "Comment" ,new { id = id});
                     }
                     else
                     {
                         TempData["message"] = "Nu aveti dreptul sa faceti modificari asupra unui articol care nu va apartine!";
-                        return RedirectToAction("Index", new { id = id, type = 1 });
+                        return RedirectToAction("Index", "Comment", new { id = id});
                     }
 
                     
