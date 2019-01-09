@@ -28,3 +28,8 @@ Admin account:
 
 - Email: user1@info.ro
 - Password: Parola123*
+
+User account:
+
+- Email: user2@info.ro
+- Password: Parola123*
