@@ -1,7 +1,7 @@
 ﻿@model DawForum.Models.Topic
 
 @{
-    ViewBag.Titlu = "Editare discutie";
+    ViewBag.Titlu = "Editare topic";
 }
 <h2>@ViewBag.Titlu</h2>
 <form method="post" action="/Topic/Edit/@Model.Id">
@@ -9,19 +9,16 @@
     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
     @Html.HiddenFor(m => m.Id)
     <br />
-    @Html.Label("Title", "Titlu Articol")
+    @Html.Label("Title", "Titlu Topic")
     <br />
     @Html.EditorFor(m => m.Title)
     @Html.ValidationMessageFor(model => model.Title, "Titlul este obligatoriu", new { @class = "text-danger " })
     <br /><br />
-    @Html.Label("Content", "Continut Articol")
+    @Html.Label("Content", "Continut Topic")
     <br />
     @Html.EditorFor(m => m.Content)
     @Html.ValidationMessageFor(model => model.Content, "Continutul este obligatoriu", new { @class = "text-danger " })
-    <br /><br />
-    @Html.HiddenFor(m => m.Date)
     <br />
     <br />
-    <button class="btn btn-sm btn-success" type="submit">Modifica discutie</button>
+    <button class="btn btn-sm btn-success" type="submit">Modifica topic-ul</button>
 </form>
-

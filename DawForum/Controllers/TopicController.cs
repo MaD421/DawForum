@@ -102,7 +102,6 @@ namespace DawForum.Controllers
                         {
                             topic.Title = requestTopic.Title;
                             topic.Content = requestTopic.Content;
-                            topic.Date = requestTopic.Date;
                             topic.CategoryId = requestTopic.CategoryId;
                             db.SaveChanges();
                             TempData["message"] = "Articolul a fost modificat!";

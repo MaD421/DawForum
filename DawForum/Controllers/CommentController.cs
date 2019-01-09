@@ -17,9 +17,9 @@ namespace DawForum.Controllers
             var comments = db.Comments.Include("User").Include("Topic").Where(p => p.Topic.Id == id);
             var topic = db.Topics.Find(id);
 
-            if (TempData.ContainsKey("message"))
+            if (TempData.ContainsKey("result"))
             {
-                ViewBag.message = TempData["message"].ToString();
+                ViewBag.result = TempData["result"].ToString();
             }
             ViewBag.Topic = topic;
             ViewBag.Comments = comments;
@@ -39,7 +39,7 @@ namespace DawForum.Controllers
                 {
                     db.Comments.Add(comment);
                     db.SaveChanges();
-                    TempData["message"] = "Mesajul a fost adaugata!";
+                    TempData["result"] = "Mesajul a fost adaugata!";
                     return RedirectToAction("Index", new { id = id });
                 }
                 else

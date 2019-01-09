@@ -4,11 +4,6 @@
     ViewBag.Title = @ViewBag.topic.Title;
 }
 <h2><a href="/Topic/Index/@ViewBag.topic.Category.CategoryId/1">@ViewBag.topic.Category.CategoryName</a>/@ViewBag.Title</h2>
-@if (TempData.ContainsKey("message"))
-{
-    <h3 class="alert alert-info" role="alert">@ViewBag.message</h3>
-}
-
 
 <table class="table">
     <thead>
@@ -45,16 +40,20 @@
 
 @if (this.User.IsInRole("User") || this.User.IsInRole("Moderator") || this.User.IsInRole("Administrator"))
 {
-<form method="post" action="/Comment/New/@ViewBag.TopicId">
-    @Html.Label("Message", "Comentariul")
-    <br />
-    @Html.TextArea("Message", null, new { @class = "form-control" })
-    @Html.ValidationMessageFor(model => model.Message, "Comentariul este obligatoriu", new { @class = "text-danger " })
-    <br /><br />
-    @Html.Hidden("Date", DateTime.Now, new { @class = "form-control" })
-    <br />
-    <button class="btn btn-sm btn-success" type="submit">Adauga comentariu</button>
-</form>
+    if (TempData.ContainsKey("result"))
+    {
+        @ViewBag.result
+    }
+    <form method="post" action="/Comment/New/@ViewBag.TopicId">
+        @Html.Label("Message", "Comentariul")
+        <br />
+        @Html.TextArea("Message", null, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Message, "Comentariul este obligatoriu", new { @class = "text-danger " })
+        <br /><br />
+        @Html.Hidden("Date", DateTime.Now, new { @class = "form-control" })
+        <br />
+        <button class="btn btn-sm btn-success" type="submit">Adauga comentariu</button>
+    </form>
 }
 
 <br />
