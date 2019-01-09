@@ -15,6 +15,8 @@ namespace DawForum.Controllers
         public ActionResult Index(int id,int type)
         {
             var topics = db.Topics.Where(p => p.CategoryId == id).Include("User").Include("Category");
+            var category = db.Categories.Find(id);
+            ViewBag.CategoryName = category.CategoryName;
             if (type == 1)
             {
                 ViewBag.type = 1;
@@ -53,7 +55,7 @@ namespace DawForum.Controllers
                 {
                     db.Topics.Add(topic);
                     db.SaveChanges();
-                    TempData["message"] = "Articolul a fost adaugat!";
+                    TempData["message"] = "Topicul a fost adaugat!";
                     return RedirectToAction("Index", new { id = id, type = 1 });
                 }
                 else

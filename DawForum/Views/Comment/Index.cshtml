@@ -1,4 +1,5 @@
 ﻿@model DawForum.Models.Comment
+@using Microsoft.AspNet.Identity
 
 @{
     ViewBag.Title = @ViewBag.topic.Title;
@@ -27,17 +28,17 @@
             <tr>
                 <th scope="col">
                     @comment.User.UserName on @comment.Date
-                        @if (this.User.IsInRole("Moderator") || this.User.IsInRole("Administrator"))
-                        {
-                            <a href="/Comment/Edit/@comment.Id">[Edit]</a>
-                        }
-                        @if (this.User.IsInRole("Moderator") || this.User.IsInRole("Administrator"))
-                        {
-                            <form method="post" action="/Comment/Delete/@comment.Id" style="display:inline">
-                                @Html.HttpMethodOverride(HttpVerbs.Delete)
-                                <button class="btn btn-link" type="submit" style="color: red">[Delete]</button>
-                            </form>
-                        }
+                    @if (User.Identity.GetUserId() == comment.UserId || this.User.IsInRole("Moderator") || this.User.IsInRole("Administrator"))
+                    {
+                        <a href="/Comment/Edit/@comment.Id">[Edit]</a>
+                    }
+                    @if (this.User.IsInRole("Moderator") || this.User.IsInRole("Administrator"))
+                    {
+                        <form method="post" action="/Comment/Delete/@comment.Id" style="display:inline">
+                            @Html.HttpMethodOverride(HttpVerbs.Delete)
+                            <button class="btn btn-link" type="submit" style="color: red">[Delete]</button>
+                        </form>
+                    }
                 </th>
             </tr>
         </thead>
